@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>云客服系统</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minmum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="shortcut icon" href="images/headeLogo.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/pagination.css">
+    <link rel="stylesheet" href="vendor/jquery.emoji.css">
+    <link rel="stylesheet" href="vendor/emjoyMyself.css">
+    <link rel="stylesheet" href="vendor/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="vendor/upload.css">
+    <link rel="stylesheet" href="vendor/upload1.css">
+    <link rel="stylesheet" href="vendor/upload2.css">
+    <link rel="stylesheet" href="vendor/upload3.css">
+    <link rel="stylesheet" href="vendor/style.css">
+    <link rel="stylesheet" href="vendor/layui/css/layui.css">
+    <link rel="stylesheet" href="vendor/contextMenu.css">
+
+    <link rel="stylesheet" href="vendor/prism.css">
+
+    <link rel="stylesheet" href="vendor/chosen.css">
+</head>
+
+<body>
+
+<div class="page1-Mainbody" ng-controller="mainC">
+    <div class="querystate" id="button">
+        <ul>
+            <li ng-repeat="e in QueryequipmentAll track by $index"><span class="querystate-Name">{{e}}</span><span
+                    class="querystate-Name1">&#12288;对应设备已离线</span></li>
+        </ul>
+    </div>
+    <div class="Mongolialayer">
+    </div>
+    <div class="page1-Maindiv1">
+        <div class="page1-Maindiv1-logo">
+
+        </div>
+        <div class="page1-Maindiv1-msg" ng-click="ChatShow($event)">
+
+        </div>
+        <div class="page1-Maindiv1-telephonebook" ng-click="PhoeBookShow($event)">
+
+        </div>
+        <span class="page1-Maindiv1-telephonebook-Explain">聊天</span>
+        <div class="page1-Maindiv1-group" data="0" ng-click="IsShowSetup($event)">
+
+        </div>
+
+        <span class="page1-Maindiv1-group-Explain">通讯录</span>
+        <span class="page1-Maindiv1-Setup-Explain">设置</span>
+        <div class="Setup" ng-show="Setup">
+
+            <ul>
+                <li ng-click="SetupClick(1)">自动回复</li>
+                <li ng-click="SetupClick(2)">标签设置</li>
+                <li ng-click="SetupClick(3)">分组设置</li>
+                <li ng-click="SetupClick(4)">快捷回复</li>
+                <li ng-click="SetupClick(5)">群&#8194消&#8194息</li>
+                <li ng-click="Exitsystem()">退&#12288&#12288出</li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="view-box" ng-class="viewSize" ng-view></div>
+
+</div>
+<div class="page1-Bg">
+
+</div>
+<div class="gray-help">
+
+</div>
+<div class="gray-help-say">
+    <div class="gray-help-say-title">
+        请阅读并确认
+    </div>
+    <div class="gray-help-say-con">
+        <div class="gray-help-say-con-text">
+        </div>
+    </div>
+    <div class="gray-help-say-bottom">
+        <button class="sure-nohave-phone" ng-click="close_help_say($event)">
+            确定
+        </button>
+    </div>
+</div>
+<script src="vendor/jquery-2.2.1.min.js"></script>
+<script src="vendor/jquery.pagination.js"></script>
+<script src="vendor/bootstrap.min.js"></script>
+<script src="vendor/angular.js"></script>
+<script src="vendor/layui/layui.all.js"></script>
+<script src="vendor/angular-route.js"></script>
+<script src="vendor/jquery.emoji.min.js"></script>
+<script src="vendor/T_upload.js"></script>
+<script src="vendor/T_upload1.js"></script>
+<script src="vendor/T_upload2.js"></script>
+<script src="vendor/T_upload3.js"></script>
+<script src="vendor/jquery.mousewheel-3.0.6.min.js"></script>
+<script src="vendor/jquery.mCustomScrollbar.min.js"></script>
+<script src="js/index.js"></script>
+<script src="vendor/select.jquery.js"></script>
+<script src="vendor/jquery.treemenu.js"></script>
+<script src="vendor/download.js"></script>
+<script src="vendor/chosen.jquery.js" type="text/javascript"></script>
+<script src="vendor/prism.js" type="text/javascript" charset="utf-8"></script>
+<script src="vendor/contextMenu.js" type="text/javascript" charset="utf-8"></script>
+<script src="vendor/contextMenu1.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    // (function () {
+    //     // 关闭窗口时弹出确认提示
+    //     $(window).bind('beforeunload', function () {
+    //         // 只有在标识变量is_confirm不为false时，才弹出确认提示
+    //         if (window.is_confirm !== false)
+    //             return '您可能有数据没有保存';
+    //     })
+    //     // mouseleave mouseover事件也可以注册在body、外层容器等元素上
+    //         .bind('mouseover mouseleave', function (event) {
+    //             is_confirm = event.type == 'mouseleave';
+    //         });
+    // })();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,1372 @@
+<div class="page1-box">
+    <div class="Graphic-link-edit-html">
+        <div class="Graphic-link-edit-html-title">
+            添加图文链接
+        </div>
+        <div class="Graphic-link-edit-html-con">
+            <div class="Graphic-link-edit-html-con-con">
+                <div class="Graphic-link-edit-html-con-con-div-1">
+                    <span>标题：</span>
+                    <input class="placeholder_color Graphic-link_input1" type="text" maxlength="64" placeholder="请输入标题">
+                    <div class="Graphic-link-edit-html-con-con-div-1-div">关键词不能为空且最多64字</div>
+                </div>
+                <div class="Graphic-link-edit-html-con-con-div-2">
+                    <span>描述：</span>
+                    <textarea class="placeholder_color Graphic-link_input2" placeholder="请输入至少五个字符" maxlength="120"
+                              minlength="1"></textarea>
+                </div>
+                <div class="Graphic-link-edit-html-con-con-div-3">
+                    <span>链接：</span>
+                    <input class="placeholder_color Graphic-link_input3" type="text" maxlength="64" placeholder="请输入链接">
+                </div>
+                <div class="Graphic-link-edit-html-con-con-div-4">
+                    <span>缩略图：</span>
+                    <div class="Graphic-link-edit-html-con-con-div-4-part">
+                        <input class="Addmodifiedkeywords-body-three-upImg-input1" type="file"
+                               accept="image/jpeg,image/jpg,image/png,image/svg" upload-file6>
+                    </div>
+                    <span class="Graphic-link-edit-html-con-con-div-4-clean"
+                          ng-click="clean_Graphic_link_photo()">清除</span>
+                    <div class="Graphic-link-edit-html-con-con-div-4-slotion">建议上传 200 * 200px 的图片</div>
+                </div>
+                <div class="Graphic-link-tishi">
+                </div>
+            </div>
+        </div>
+        <div class="Graphic-link-edit-html-footer">
+            <div>
+                <button class="Graphic-link-edit-html-footer-no" ng-click="closeGraphiclink()">取消</button>
+                <button class="Graphic-link-edit-html-footer-yes" data=0 ng-click="sureGraphiclink()">确定</button>
+            </div>
+        </div>
+    </div>
+    <!-----------------------聊天部分------------------------->
+    <div ng-show="ChataddressbookswitchingChat" class="page1-Maindiv2">
+        <div class="page1-Maindiv2-myfriends">
+            <div class="page1-Maindiv2-myfriends-chose-wechat">
+                <select class="multiselect" id="single">
+                    <option value="-1">请选择</option>
+                    <option value="{{e.id}}" ng-repeat="e in Initializationofsocialnumbers track by $index">
+                        {{NmeSlice(e.nickName)}}
+                    </option>
+                </select>
+                <div class="page1-Maindiv2-myfriends-search">
+                    <span class="page1-Maindiv2-myfriends-search-logo"></span>
+                    <input type="text" class="page1-Maindiv2-myfriends-search-input" data_two="1" placeholder="搜索联系人">
+                    <!--<span class="clearCon" ng-click="clearCon1()">x</span>-->
+                </div>
+            </div>
+            <!-------------好友搜索-------------->
+            <div class="page1-Maindiv2-myfriends-search-con page1-Maindiv2-listInit">
+                <div class="page1-Maindiv2-myfriends-search-con-people">
+                    <div class="csi1">
+                        <span class="page1-Maindiv2-myfriends-search-con-people-title">好友</span>
+                        <ul class="page1-Maindiv2-myfriends-search-con-ul">
+                            <li ng-click="gotoChat(e.cid,e.nickName||e.noteName,e.profilePhoto,e.id,e.socialaccountId,e.type,e.topNumber,$event,0,$index)"
+                                ng-repeat="e in chatListSEarch track by $index" data="sdsadsa"
+                                data1_nickname="search_list"><img
+                                    src="{{e.profilePhoto}}"
+                                    data="{{e.type}}"
+                                    data1_nickname="search_list"
+                                    alt="">&#12288;<span
+                                    class="page1-Maindiv2-myfriends-search-con-ul-name page1-Maindiv2-search-name"
+                                    data1_nickname="search_list">{{e.nickName}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-------------好友搜索历史记录-------------->
+            <div class="page1-Maindiv2-myfriends-search-con_history">
+                <div class="page1-Maindiv2-myfriends-search-con-people">
+                    <div class="csi1">
+                        <span class="page1-Maindiv2-myfriends-search-con-people-title">历史记录</span>
+                        <ul class="page1-Maindiv2-myfriends-search-con-ul_1">
+                            <li ng-repeat="e in Searchhistory_Chatting track by $index"
+                                ng-click="ChoosethisChatrecord(e)">
+                                <span class="page1-Maindiv2-myfriends-search-con-ul-index">{{$index+1}} .</span>
+                                <span class="page1-Maindiv2-myfriends-search-con-ul-name page1-Maindiv2-search-name"
+                                      style="top: 2px"> {{e}}</span>
+                                <span class="deleate_search_history" ng-click="delete_history($index,$event,1)"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--------------------好友列表----------------------->
+            <div class="wechatList">
+                <ul class="page1-Maindiv2-myfriends-search-con-ul1">
+                    <li class="moveFriendList" ng-class="IstopInit(e.topNumber)"
+                        ng-repeat="e in frienfList  track by $index"
+                        data="{{e.cid}}"
+                        data-id="{{e.id}}"
+                        data-index="{{$index}}"
+                        gotoChat
+                        ng-click="gotoChat(e.cid,e.nickName||e.noteName,e.profilePhoto,e.id,e.socialaccountId,e.type,e.topNumber,$event,1,$index)"
+                        distinguish=0 rendering-completion>
+                        <img src="{{e.profilePhoto}}" distinguish=1>&#12288;
+                        <span class="page1-Maindiv2-myfriends-search-con-ul-name1" distinguish=1>{{e.nickName||e.noteName}}</span>
+                        <span class="new-time" distinguish=1>{{getLastTime(e.lastChatTime)}}</span><br>
+                        <span class="page1-Maindiv2-myfriends-search-con-ul-tagname1" data="{{e.cid}}"
+                              data1="{{e.topNumber}}" data2="{{e.id}}" data3="{{e.type}}" data4="{{e.cid}}" data5="
+                              {{e.socialaccountId}}" distinguish=1>{{e.newMessage}}</span>
+                        <span class="new-msg-number" d istinguish=1></span>
+                        <span class="Account-number" distinguish=1>
+                            <span class="Account-number-logo" ng-class="isOnLine(e.Deviceonline)"></span>
+                            <span class="Account-number-user">{{getUser(e.socialaccountId)}}</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div ng-show="ChataddressbookswitchingChat" class="page1-Maindiv3" data="{{chatId}}">
+        <div ng-show="ChatModule">
+            <div class="chat-top">
+                <span class="chat-top-title">{{chatName}}</span>
+                <span class="chat-top-close" ng-click="CloseChatModule()"></span>
+                <span class="chat-top-totop" data=0 ng-click="chatFriendToTop(-1,-1,-1,-1)"></span>
+                <span class="chat-top-totop-Explain">置顶</span>
+                <div class="segmenting-line"></div>
+                <!----------聊天内容------------->
+                <div class="chat-top-chatUs RightCont">
+                    <div class="ChatRecord" ng-click="LoadHistoryRecord($event)">-------------------- 查看更多消息
+                        --------------------
+                    </div>
+                    <ul class="newsList">
+                    </ul>
+                </div>
+            </div>
+            <!------------发送内容---------->
+            <div class="chat-bottom">
+                <div class="Newmessagereminding">
+                    <span class="Newmessagereminding-icon" ng-click="LookNewMsg()">
+
+                    </span>
+                    <span class="Newmessagereminding-text" ng-click="LookNewMsg()">
+                        {{unreadMessages}}条新消息
+                    </span>
+                    <span class="Newmessagereminding-close" ng-click="NotLookNewMsg()">
+x
+                    </span>
+                </div>
+                <div class="chat-bottom-con">
+                    <div class="chat-bottom-con-logo">
+                        <span class="chat-bottom-con-smile" id="btn1"></span>
+                        <span class="chat-bottom-con-upimg"></span>
+                        <span class="chat-bottom-con-upfile"></span>
+                        <input class="image-upfile" type="file" upload-file accept="image/*">
+                        <input class="image-upfile1" type="file" multiple="multiple">
+                        <span class="chat-bottom-con-smile-Explain">表情</span>
+                        <span class="chat-bottom-con-upimg-Explain">图片</span>
+                    </div>
+
+                    <div class="chat-bottom-write" id="editor1" contenteditable="true" ng-keyup="myKeyup($event)">
+                    </div>
+                    <div class="chat-bottom-send-all">
+                        <span class="keydown-enter">按下Ctrl+Enter换行&#12288;</span>
+                        <button class="chat-bottom-send" ng-click="sengChatMsg()">
+                            发送
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="Chat-layer">
+
+            </div>
+            <div class="Chat-layer-say">
+                当前设备处于离线状态，请检查设备在线状态！
+            </div>
+        </div>
+
+
+    </div>
+    <div ng-show="ChataddressbookswitchingChat" class="page1-Maindiv4">
+        <div class="page1-Maindiv4-InitBg" ng-show="page1Maindiv4Init">
+
+        </div>
+        <div class="page1-Maindiv4-Init" ng-show="page1Maindiv4Init">
+
+        </div>
+        <div class="page1-div3-title">
+            <span ng-click="page1TableSwitch(1)" class="page1-div3-title-span1">客户信息</span>
+            <span ng-click="page1TableSwitch(2)" class="page1-div3-title-span2">快捷回复</span>
+            <span ng-click="page1TableSwitch(3)" class="page1-div3-title-span3">客户记录</span>
+        </div>
+        <div class="page1-div3-content" ng-show="Customerinformation">
+            <span class="page1-div3-content-title">资料</span>
+            <!-----------好友相关资料----------->
+            <div class="page1-div3-content-myself" ng-show="myself">
+                <div><span class="page1-div3-content-myself-1"></span>&#12288;昵&#12288;称： <span class="nikeNme_short">{{MyFrienddata1.nickName}}</span>
+                </div>
+                <div><span class="page1-div3-content-myself-2"></span>&#12288;备&#12288;注：
+                    <div class="page1-div3-content-name change-name" data="{{MyFrienddata1.id}}"></div>&#12288;<span
+                            class="edit-name" ng-click="editName()"></span></div>
+                <div><span class="page1-div3-content-myself-3"></span>&#12288;微信号：
+                    <span>{{MyFrienddata1.alias}}</span></div>
+                <div><span class="page1-div3-content-myself-4"></span>&#12288;性&#12288;别： <span>{{sex(MyFrienddata1.sex)}}</span>
+                </div>
+                <div><span class="page1-div3-content-myself-5"></span>&#12288;地&#12288;区： <span>{{MyFrienddata1.province}}</span>
+                    <span>{{MyFrienddata1.city}}</span></div>
+                <div><span class="page1-div3-content-myself-6"></span>&#12288;手&#12288;机：
+                    <input data="{{MyFrienddata1.id}}" class="page1-div3-content-name1 change-phone change-phone-1-2"
+                           readonly="true"
+                           type='text' maxlength="11"/>&#12288;<span
+                            class="edit-name" ng-click="editPhone()"></span></div>
+                <div><span class="page1-div3-content-myself-7"></span>&#12288;分&#12288;组： <select
+                        class="page1-div3-content-myself-select first-select">
+                    <option value="0">选择分组</option>
+                    <option value="{{e.id}}" ng-repeat="e in InformationGrouping track by $index" data="{{e.id}}">
+                        {{e.name}}
+                    </option>
+                </select>
+                </div>
+                <div class="myself-image">
+                    <img src="{{MyFrienddata1.profilePhoto}}" alt="">
+                </div>
+            </div>
+            <!-----------群组相关资料----------->
+            <div class="page1-div3-content-myself1" ng-show="myself1">
+                <div><span class="page1-div3-content-myself-1"></span>&#12288;群&#12288;名： <span class="nikeNme_short">{{Mygroupdata.chatroomName}}</span>
+                </div>
+                <div><span class="page1-div3-content-myself-2"></span>&#12288;群名片：
+                    <div class=" page1-div3-content-name-Group-First" data="{{Mygroupdata.id}}"
+                         data1="{{Mygroupdata.socialaccountId}}">{{Mygroupdata.myNickName}}
+                    </div>&#12288;<span
+                            class="edit-name" ng-click="editName4()"></span></div>
+                <div><span class="page1-div3-content-myself-7"></span>&#12288;分&#12288;组： <select
+                        class="four-select">
+                    <option value="0">选择分组</option>
+                    <option value="{{e.id}}" ng-repeat="e in InformationGrouping track by $index" data="{{e.id}}">
+                        {{e.name}}
+                    </option>
+                </select>
+                </div>
+                <div><span class="page1-div3-content-myself--group1"></span>&#12288;群成员：
+                    <span>{{Mygroupdata.memberCount}}</span>&#12288;<span class="blue"
+                                                                          ng-class="groupListIsShow(Mygroupdata.memberCount)"
+                                                                          style="cursor: pointer"
+                                                                          ng-click="showcusstomList()">查看</span>
+                </div>
+                <div><span class="page1-div3-content-myself--group2"></span>&#12288;群公告：
+                    <textarea class="group-say-edit" disabled="disabled">
+{{Mygroupdata.chatroomAnnouncement}}
+                    </textarea>
+                </div>
+                <div class="myself-image1">
+                    <img src="{{Mygroupdata.chatroomProfilePhoto}}" alt="">
+                </div>
+            </div>
+            <span class="page1-div3-content-title" style="margin-top: 20px">标签
+                <span class="page1-div3-content-title-edit-tag2" data=0 ng-click="addTagIsshow(1)">自定义</span>
+                <span class="page1-div3-content-title-edit-tag" data=0 ng-click="addTagIsshow(2)">选择</span>
+            </span>
+            <!-----------标签部分----------->
+            <div class="page1-div3-content-tags">
+                <div class="add_tag_input">
+                    <input type="text" class="add_tag_input_add" placeholder="自定义多个标签以，分隔">
+                </div>
+                <!--------动态添加标签-------->
+                <div class="side-by-side clearfix" style="margin-top: 20px;display: none">
+                    <div>
+
+                        <select data-placeholder="点击选择想要添加的标签" style="width:300px;"
+                                class="chosen-select" multiple tabindex="6">
+                            <optgroup ng-repeat="e in Taglibrary track by $index" label="{{e.tagName}}">
+
+                                <option ng-repeat="i in e.tags track by $index">{{i.tagName
+                                    }}
+                                </option>
+
+                            </optgroup>
+                        </select>
+
+                    </div>
+
+                </div>
+                <!------已有标签展示------>
+                <div class="tags-box">
+                    <span ng-click="delOneTag(e)" class="tags-box-initTag" ng-repeat="e in FriendTags track by $index"
+                          ng-class="ChangeColor($index+1,FriendTags,e)" data="{{e}}">{{e}} <span
+                            style="font-size: 15px;cursor: pointer;padding: 0px 2px;position: relative;top: -2px">x</span></span>
+                </div>
+            </div>
+            <!-----------描述部分----------->
+            <div class="whiteMe">
+                <span class="page1-div3-content-title">描述</span>
+                <div class="whiteMeAll">
+                    <textarea class="whiteMeContent " tabindex="0">
+
+                    </textarea>
+                    <span class="whiteMeContentEdit" ng-click="editWhitMe()"></span>
+                </div>
+            </div>
+            <!-----------好友归属部分----------->
+            <div class="forPhone">
+                <span class="page1-div3-content-title">好友归属</span>
+                <div class="forPhone-content">
+                    <span class="forPhone-content-logo"></span>&#12288;微信：<span class="blue klk"
+                                                                                ng-click="asdpnn()"></span>
+                </div>
+            </div>
+        </div>
+        <!-----------所有群组所有成员------------->
+        <div class="all-customer" ng-show="allCustomerList">
+            <div class="all-customer-back" ng-click="backGroupPage()">
+                <span class="all-customer-back-logo"></span> 返回
+            </div>
+            <div class="all-customer-search">
+                <span class="all-customer-search-logo"></span>
+                <input class="all-customer-search-logo-input" type="text" placeholder="请输入关键字">
+            </div>
+            <div class="all-customer-list">
+                <ul class="all-customer-list-ul">
+                    <li class="all-customer-list-ul-li" ng-repeat="e in Listofallgroupmembers track by $index">
+                        <img src="{{e.profilePhoto}}">&#12288;<span class="all-customer-list-ul-li-name">{{e.memberName}}</span>
+                        <span class="all-customer-list-ul-li-alert" ng-class="AllcustomerList(e.whetherFriend)"
+                              ng-click="addOrSend(e.whetherFriend,e.chatroomMemberWxid,e.id,$event,e.chatroomId)"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!------------快捷回复部分----------->
+        <div class="quick-reply-table" ng-show="quickReply">
+            <div class="quick-reply-table-div">
+                <div class="quick-reply-table-div1" ng-click="quickRelyTable(1)">
+                    快捷短语
+                </div>
+                <div class="quick-reply-table-div2" ng-click="quickRelyTable(2)">
+                    图片库
+                </div>
+                <div class="quick-reply-table-div3" ng-click="quickRelyTable(3)">
+                    图文链接
+                </div>
+            </div>
+            <!------------快捷短语部分----------->
+            <div class="quick-reply-treemenu" ng-show="quickReplyPhrase">
+                <div class="quick-reply-treemenu-list">
+                    <ul class="tree">
+                        <li ng-repeat="e in AllShortcutphrase track by $index"><span><span class="tree-icon"></span>{{NmeSlice1(e.title)}}</span>
+                            <ul>
+                                <li class="quick-reply-treemenu-to-msg" ng-repeat="m in e.scripts track by $index"><span
+                                        class="tree-icon1"></span>&#12288;<span
+                                        class="quick-reply-treemenu-list-con">{{m.content}}</span>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <!------------快捷短语上传下载----------->
+            <div class="quick-reply-up-down" ng-show="quickReplyPhrase">
+                <input type="file" accept=".XLS" class="upfiler3" upload-file2>
+                <div class="quick-reply-up-down-up" ng-click="upquickReplyPhrase()">
+                    <span></span>
+                    导入
+                </div>
+                <a class="quick-reply-up-down-down" href="{{DownFileOut}}" target="_blank">
+                    <span></span>
+                    导出
+                </a>
+            </div>
+            <!------------图片库部分----------->
+            <div class="picture-library" ng-show="quickReplylibrary">
+                <ul>
+                    <li ng-repeat="v in Picturelibrary track by $index">
+                        <div class="picture-library-img">
+                            <img src="{{v.imagePath}}">
+
+                            <span class="picture-library-img-del-bag" data="{{v.id}}"
+                                  ng-click="delPicturelibraryImg(v.id,$event)">
+                                <span class="picture-library-img-del"></span>
+                            </span>
+                            <button class="send-picture-library"
+                                    ng-click="Picturelibraryuploadingpictures(v.imagePath)">发送
+                            </button>
+                            <div class="picture-library-img-name" contenteditable="false" tabindex="0">
+                                {{v.title}}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!------------图片库上传----------->
+            <div class="quick-reply-up-down" ng-show="quickReplylibrary">
+                <input type="file" class="upToImg" accept="image/*" upload-file1>
+                <div class="quick-reply-up-down-up">
+                    <span></span>
+                    上传
+                </div>
+            </div>
+            <!------------图文链接部分----------->
+
+            <div class="Graphic-link" ng-show="Graphiclink">
+                <ul>
+                    <li ng-repeat="m in AllGraphiclink track by $index">
+                        <div class="Graphic-link-div">
+                            <dl>
+                                <dt>
+                                    <span class="Graphic-link-div-title">{{break_title_con(m.title)}}</span>
+                                    <span class="Graphic-link-div-con">{{break_title_con(m.content)}}</span>
+                                    <button class="Graphic-link-div-send"
+                                            ng-click="defultLinkSend(m.id,m.title,m.content,m.imgpath,m.url)">发送
+                                    </button>
+                                </dt>
+                                <dd>
+                                    <img src={{m.imgpath}} alt="">
+                                    <div class="Graphic-link-div-dd-con"><span class="Graphic-link-edit"
+                                                                               ng-click="editGraphiclink(m.id,m.title,m.content,m.imgpath,m.url)">编辑</span><span
+                                            class="Graphic-link-del" ng-click="delGraphiclink(m.id)">删除</span></div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="Graphic-link-down" ng-show="Graphiclink">
+                <div class="Graphic-link-down-up" ng-click="openGraphiclink()">
+                    <span></span>
+                    新建
+                </div>
+            </div>
+
+        </div>
+        <!------------客户记录部分----------->
+        <div class="customer-record" ng-show="customerRecord">
+            <div class="customer-record-table-div">
+                <div class="customer-record-table-div1" ng-click="customerRecord1(1)">
+                    文字记录
+                </div>
+                <div class="customer-record-table-div2" ng-click="customerRecord1(2)">
+                    图片记录
+                </div>
+            </div>
+            <div class="customer-record-time customer-record-time1">
+                <span class="customer-record-time-left"></span>
+                <span class="customer-record-time-con">
+                {{TextrecordTime}}</span>
+                <span class="customer-record-time-right"></span>
+            </div>
+            <div class="chat-record" ng-show="chatRecord">
+                <ul>
+                    <li ng-repeat=" e in Textrecord track by $index">
+                        <dl class="chat-record-dl">
+                            <dt>
+                                <img ng-src='{{e.profilephoto}}' alt="">
+                            </dt>
+                            <dd>
+                                <span ng-class="chatrecord2(e.msgStatus)">{{Characterdiscrimination(e.msgStatus,e.contactNickname)}}</span>&#12288;<span
+                                    ng-class="chatrecord2(e.msgStatus)">{{e.theDate}}</span><br>
+                                <span ng-class="chatrecord2(e.msgStatus)" class="chat-record-con">{{Getridofthechange(e.chatMessage,e.msgStatus)}}</span>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="quick-reply-up-down" ng-show="chatRecord">
+                <div class="quick-reply-up-down-up" ng-click="upquickReplyPhrase()">
+                    <input type="text" class="chat-record-search" placeholder="请输入关键字">
+                    <button class="chat-record-search-sure" ng-click="searchTextfocus($event)">确定</button>
+                </div>
+                <div class="chat-record-table-chat">
+                    <span class="chat-record-table-chat-span1" ng-click="Getthehomepage()"></span>
+                    <span class="chat-record-table-chat-span2" ng-click="Getthelastpage()"></span>
+                    <span class="chat-record-table-chat-span3" ng-click="Getthenextpage()"></span>
+                    <span class="chat-record-table-chat-span4" ng-click="Getthebackpage()"></span>
+                </div>
+            </div>
+            <!----------------图片聊天记录-------------->
+            <div class="chat-record-img" ng-show="chatRecordImg">
+                <ul ng-repeat="e in Imgrecord track by $index">
+                    <div class="customer-record-time">
+                        <span class="customer-record-time-left"></span>
+                        <span class="customer-record-time-con">
+                {{Time_Slice(e[0].theDate)}}</span>
+                        <span class="customer-record-time-right"></span>
+                    </div>
+                    <li>
+                        <div ng-repeat="e1 in e track by $index" class="chat-record-img-div"
+                             ng-click="Picture_preview(e1.chatMessage)">
+                            <img src="{{e1.chatMessage}}">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-----------关键字搜索聊天记录---------->
+            <div class="Searchkeywords" ng-show="SearchkeywordsHistory">
+                <div class=" Searchkeywords-back">
+                    <span class="Searchkeywords-num">已为您搜索到<span>{{returnConNum}}</span>条聊天记录</span></span>
+                    <span class="Searchkeywords-back-logo-fath" ng-click="hidesHistory()"><span
+                            class="Searchkeywords-back-logo1"></span>返回</span>
+                </div>
+                <div class="customer-record-time1">
+                    <span class="customer-record-time-left"></span>
+                    <span class="customer-record-time-con">
+                {{returnConTime}}</span>
+                    <span class="customer-record-time-right"></span>
+                </div>
+                <div class="all-customer-list1">
+                    <ul class="jimn">
+                        <li ng-repeat=" e in returnCon track by $index">
+                            <span ng-class="chatrecord2(e.msgStatus)">{{Characterdiscrimination(e.msgStatus,e.contactNickname)}}</span>
+                            &#12288;
+                            <span ng-class="chatrecord2(e.msgStatus)">{{e.theDate}}</span><br>
+                            <span ng-class="chatrecord2(e.msgStatus)" class="chat-record-con">{{Getridofthechange(e.chatMessage,e.msgStatus)}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="personaldata" tabindex="0" id="personaldata_1" ng-blur="bblur()" ng-click="bblur1()"
+             ng-mousedown="bblur2()">
+            <div class="personaldata-close" ng-click="personaldataclose()">
+                X
+            </div>
+            <img class="personaldata-header-img" src="{{getSocialaccountdetail.profilePhoto}}" alt="">
+            <div class="personaldata-data-con">
+                <div><span class="personaldata-data-con-myself-1"></span>&#12288;昵&#12288;称： <input type="text"
+                                                                                                    id="personaldata_2"
+                                                                                                    class="personaldata-data-con-myself-1-input"
+                                                                                                    disabled="disabled">
+
+                </div>
+                <div><span class="personaldata-data-con-myself-2"></span>&#12288;微信号：
+                    <input type="text" class="personaldata-data-con-myself-2-input"
+                           value="{{getSocialaccountdetail.socialNumber}}" disabled="disabled">
+                </div>
+                <div><span class="personaldata-data-con-myself-3"></span>&#12288;性&#12288;别：
+                    <span class="personaldata-data-con-myself-3-span"></span>
+                    <select class="personaldata-data-con-myself-3-select" id="personaldata_3">
+                        <option value=0>未知</option>
+                        <option value=1>男</option>
+                        <option value=2>女</option>
+                    </select>
+                </div>
+                <div><span class="personaldata-data-con-myself-4"></span>&#12288;地&#12288;区： <span>{{getSocialaccountdetail.province}}</span>
+                    <span>{{getSocialaccountdetail.city}}</span>
+                </div>
+                <div><span class="personaldata-data-con-myself-5"></span>&#12288;签&#12288;名：
+
+                    <textarea id="personaldata_4" class="personaldata-data-con-myself-5-textarea-whiteMeContent "
+                              tabindex="0"
+                              disabled="disabled">{{getSocialaccountdetail.whatUp}}</textarea>
+                </div>
+            </div>
+            <div class="edit-personaldata" ng-click="editPersonaldata($event)" data=0>
+                修改资料
+            </div>
+        </div>
+    </div>
+    <!-----------------------通讯录部分------------------------->
+    <div ng-show="ChataddressbookswitchingBook" class="page1-Maindiv5">
+        <div class="page1-Maindiv2-myfriends">
+            <div class="page1-Maindiv2-myfriends-chose-wechat">
+                <div class="page1-Maindiv2-myfriends-search1 page1-Maindiv5-search1">
+                    <span class="page1-Maindiv2-myfriends-search-logo"></span>
+                    <input type="text" class="page1-Maindiv2-myfriends-search-input1" ng-blur="loseBlur($event)"
+                           placeholder="搜索">
+                </div>
+            </div>
+            <!-------------搜索出来的微信列表-------------->
+            <div class="page1-Maindiv2-myfriends-search-con pho-bo-list-search1">
+                <div class="page1-Maindiv2-myfriends-search-con-people">
+                    <div class="csi1">
+                        <span class="page1-Maindiv2-myfriends-search-con-people-title">微信</span>
+                        <ul class="page1-Maindiv2-myfriends-search-con-ul">
+                            <li ng-repeat="e in tponeListSEarch track by $index"
+                                ng-click="tablePhoneFriendList(e.id,e.cid)"><img
+                                    src="{{e.profilePhoto}}" alt="">&#12288;<span
+                                    class="page1-Maindiv2-myfriends-search-con-ul-name">{{e.nickName}}</span></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="wechatList-title">
+                所有微信号
+            </div>
+            <!--------------------微信账号列表----------------------->
+            <div class="wechatList Maillist-myfriends">
+                <ul class="page1-Maindiv2-myfriends-search-con-ul1 Maillist-myfriends-li-bottom-line">
+                    <li class="moveFriendList moveFriendList-phone" ng-repeat="e in MaillistInitData track by $index"
+                        data="{{e.id}}" ng-click="getphoneBookList(e.id,e.cid,e.nickName,$event)">
+                        <div class="ssnnsnd">
+                            <img src="{{e.profilePhoto}}" alt="">&#12288;
+                            <span class="page1-Maindiv2-myfriends-search-con-ul-name1-Maillist-myfriends">{{e.nickName||e.noteName}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!----------------------当前微信号下好友列表----------------------->
+    <div ng-show="ChataddressbookswitchingBook" class="page1-Maindiv6">
+        <div class="page1-Maindiv6-myfriends-chose-wechat">
+            <select class="multiselect select-first" id="single1">
+                <option value="-1">请选择</option>
+                <option value="{{e.id}}" class="biubiu" ng-repeat="e in PhoneBookInformationGrouping track by $index">
+                    {{e.name}}
+                </option>
+            </select>
+            <div class="page1-Maindiv2-myfriends-search jisd">
+                <span class="page1-Maindiv2-myfriends-search-logo"></span>
+                <input type="text" class="page1-Maindiv2-myfriends-search-input select-first-1 select-first-1-1"
+                       placeholder="搜索" data_two="2">
+                <!--<span class="clearCon" ng-click="clearCon1()">x</span>-->
+            </div>
+        </div>
+
+        <!----------------通讯录搜索后的好友显示--------------->
+        <div class="page1-Maindiv2-myfriends-search-con Phone-book-dropdown-Search-Show">
+            <div class="page1-Maindiv2-myfriends-search-con-people">
+                <div class="csi2">
+                    <span class="page1-Maindiv2-myfriends-search-con-people-title">{{searchListOneTo}}</span>
+                    <ul class="page1-Maindiv2-myfriends-search-con-ul csi2-list-1">
+                        <li ng-repeat="e in DDorTop track by $index"
+                            data1="{{e.fristWord}}"
+                            data2="{{e.id}}"
+                            data3="{{e.socialaccountId}}"
+                            data4="{{e.nickName}}"
+                            data5="{{e.contactNumber}}"
+                            data6="{{e.noteName}}"
+                            data7="{{e.profilePhoto}}"
+                            data8="{{e.phone}}"
+                            data9="{{e.tags}}"
+                            data10="{{e.sex}}"
+                            data11="{{e.province}}"
+                            data12="{{e.city}}"
+                            data13="{{e.description}}"
+                            data14="{{e.chatroomAnnouncement}}"
+                            data15="{{e.myNickName}}"
+                            data16="{{e.memberCount}}"
+                            data17="{{e.groupId}}"
+                            data18="{{e.cid}}"
+                            data19="{{e.topNumber}}"
+                            data20="{{e.alias}}"
+                            data1_nickname="tel_search_list"
+                        ><img src="{{e.profilePhoto}}"
+
+                              alt=""   data1_nickname="tel_search_list">&#12288;
+                            <span
+                                    class="page1-Maindiv2-myfriends-search-con-ul-name csi2-list-1-nICK"   data1_nickname="tel_search_list">{{e.nickName}}</span>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!----------------通讯录搜索后的历史记录--------------->
+        <div class="tel_history_list">
+            <div class="page1-Maindiv2-myfriends-search-con-people">
+                <div class="csi2">
+                    <span class="tel_history_list_title">历史记录</span>
+                    <ul class="page1-Maindiv2-myfriends-search-con-ul_1">
+                        <li ng-repeat="e in Searchhistory_Maillist track by $index"
+                            ng-click="ChoosethisChatrecord1(e)">
+                            <span class="page1-Maindiv2-myfriends-search-con-ul-index">{{$index+1}} .</span>
+                            <span class="page1-Maindiv2-myfriends-search-con-ul-name page1-Maindiv2-search-name"
+                                  style="top: 2px"> {{e}}</span>
+                            <span class="deleate_search_history" ng-click="delete_history($index,$event,2)"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="page1-Maindiv6-title">
+            联系人
+        </div>
+        <div class="page1-Maindiv6-con">
+            <!---------------通讯录字母导航-------------->
+            <div class="Alphabeticalnavigation">
+                <ul>
+                    <li ng-click="Alphabetretrieval(0)">群</li>
+                    <li ng-click="Alphabetretrieval(1)">A</li>
+                    <li ng-click="Alphabetretrieval(2)">B</li>
+                    <li ng-click="Alphabetretrieval(3)">C</li>
+                    <li ng-click="Alphabetretrieval(4)">D</li>
+                    <li ng-click="Alphabetretrieval(5)">E</li>
+                    <li ng-click="Alphabetretrieval(6)">F</li>
+                    <li ng-click="Alphabetretrieval(7)">G</li>
+                    <li ng-click="Alphabetretrieval(8)">H</li>
+                    <li ng-click="Alphabetretrieval(9)">I</li>
+                    <li ng-click="Alphabetretrieval(10)">J</li>
+                    <li ng-click="Alphabetretrieval(11)">K</li>
+                    <li ng-click="Alphabetretrieval(12)">L</li>
+                    <li ng-click="Alphabetretrieval(13)">M</li>
+                    <li ng-click="Alphabetretrieval(14)">N</li>
+                    <li ng-click="Alphabetretrieval(15)">O</li>
+                    <li ng-click="Alphabetretrieval(16)">P</li>
+                    <li ng-click="Alphabetretrieval(17)">Q</li>
+                    <li ng-click="Alphabetretrieval(18)">R</li>
+                    <li ng-click="Alphabetretrieval(19)">S</li>
+                    <li ng-click="Alphabetretrieval(20)">T</li>
+                    <li ng-click="Alphabetretrieval(21)">U</li>
+                    <li ng-click="Alphabetretrieval(22)">V</li>
+                    <li ng-click="Alphabetretrieval(23)">W</li>
+                    <li ng-click="Alphabetretrieval(24)">X</li>
+                    <li ng-click="Alphabetretrieval(25)">Y</li>
+                    <li ng-click="Alphabetretrieval(26)">Z</li>
+                    <li ng-click="Alphabetretrieval(27)">#</li>
+                </ul>
+            </div>
+            <!--------------通讯录好友列表--------------->
+            <div class="Alphabeticalnavigation-list">
+                <ul ng-repeat=" e in searchReturnList track by $index">
+                    <div class="Alphabeticalnavigation-list-title">
+                        {{e[0].name}}
+                    </div>
+                    <li ng-repeat="i in e[1] track by $index"
+                        ng-click="getPhoneData(i.fristWord,i.id,i.socialaccountId,i.nickName,i.contactNumber,i.noteName,i.profilePhoto,i.phone,i.tags,i.sex,i.province,i.city,i.description,i.chatroomAnnouncement,i.myNickName,i.memberCount,i.groupId,i.topNumber,i.alias)">
+                        <div class="Alphabeticalnavigation-list-con">
+                            <img src="{{i.profilePhoto}}" alt="">
+                            <span>{{i.nickName||noteName}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!----------------------当前微信号下好友基本资料----------------------->
+    <div ng-show="ChataddressbookswitchingBook" class="page1-Maindiv7">
+        <div class="page1-Maindiv7-content" ng-show="Addressbook">
+            <div class="page1-Maindiv7-title">
+                个人资料
+            </div>
+            <div class="page1-Maindiv7-info">
+                信息
+            </div>
+            <!-----------好友基本资料----------->
+            <div class="page1-Maindiv7-content-myself" ng-show="Addressbookfriends">
+                <div><span class="page1-div3-content-myself-1"></span>&#12288;昵&#12288;称：
+                    <span class="imSpan1">{{impPhonickName}}</span>
+                </div>
+                <div><span class="page1-div3-content-myself-2"></span>&#12288;备&#12288;注：
+                    <div class="imponoteName"
+                         data="{{impPhonoteName}}"></div>&#12288;<span
+                            class="edit-name" ng-click="editName1()"></span></div>
+                <div><span class="page1-div3-content-myself-3"></span>&#12288;微信号：
+                    <span>{{impPhoTalias}}</span></div>
+                <div><span class="page1-div3-content-myself-4"></span>&#12288;性&#12288;别：
+                    <span>{{sex(impPhosex)}}</span>
+                </div>
+                <div><span class="page1-div3-content-myself-5"></span>&#12288;地&#12288;区：
+                    <span>{{impPhoprovince}}</span>
+                    <span>{{impPhocity}}</span></div>
+                <div><span class="page1-div3-content-myself-6"></span>&#12288;手&#12288;机：
+                    <input data="{{impPhoId}}" class="imponotePhoneNumber"
+                           readonly="true"
+                           type='text'/>&#12288;<span
+                            class="edit-name" ng-click="editPhone1()" maxlength="11"></span></div>
+                <div><span class="page1-div3-content-myself-7"></span>&#12288;分&#12288;组： <select
+                        class=" first-select second-select " data="{{impPhoId}}">
+                    <option value="0">选择分组</option>
+                    <option value="{{e.id}}" ng-repeat="e in impPhoAllGroups track by $index" data="{{e.id}}">
+                        {{e.name}}
+                    </option>
+                </select>
+                </div>
+                <div class="myself-image page1-Maindiv7-myself-image">
+                    <img src="{{impPhoprofilePhoto}}">
+                    <div class="page1-Maindiv7-myself-image-send-Msg" ng-click="chatWithChose()">
+                        发消息
+                    </div>
+                    <div class="page1-Maindiv7-delete-ThisFriend" ng-click="Delete_and_exit(0)">
+                        <span class="page1-Maindiv7-delete-ThisFriend-text">删除好友</span>
+                        <!--<span class="page1-Maindiv7-delete-ThisFriend-icon"></span>-->
+                    </div>
+                </div>
+            </div>
+            <!-----------群资料----------->
+            <div class="page1-div3-content-myself1 page1-div3-content-myself1-1" ng-show="Addressbookdata">
+                <div><span class="page1-div3-content-myself-1"></span>&#12288;群&#12288;名：
+                    <span>{{impPhonickName}}</span>
+                </div>
+                <div><span class="page1-div3-content-myself-2"></span>&#12288;群名片：
+                    <div class="sree-impPhomyNickName">{{impPhomyNickName}}</div>&#12288;<span
+                            class="phonGroupName" ng-click="editName3()"></span></div>
+                <div><span class="page1-div3-content-myself-7"></span>&#12288;分&#12288;组： <select
+                        class="sree-select">
+                    <option value=0>选择分组</option>
+                    <option value="{{e.id}}" ng-repeat="e in impPhoAllGroups track by $index" data="{{e.id}}">
+                        {{e.name}}
+                    </option>
+                </select>
+                </div>
+                <div><span class="page1-div3-content-myself--group1"></span>&#12288;群成员：
+                    <span>{{impPhomemberCount}}</span>&#12288;
+                    <!--<span class="blue"-->
+                    <!--ng-class="groupListIsShow(Mygroupdata.memberCount)"-->
+                    <!--style="cursor: pointer"-->
+                    <!--ng-click="showcusstomList()">查看</span>-->
+                </div>
+                <div><span class="page1-div3-content-myself--group2"></span>&#12288;群公告：
+                    <textarea class="group-say-edit-1" disabled="disabled">
+{{impPhochatroomAnnouncement}}
+                    </textarea>
+                </div>
+
+                <div class="myself-image page1-Maindiv7-myself-image">
+                    <img src="{{impPhoprofilePhoto}}">
+                    <button class="page1-Maindiv7-myself-image-send-Msg" ng-click="chatWithChose()">
+                        发消息
+                    </button>
+                    <div class="page1-Maindiv7-delete-ThisFriend" ng-click="Delete_and_exit(1)">
+                        <span class="page1-Maindiv7-delete-ThisFriend-text">退出群聊</span>
+                        <!--<span class="page1-Maindiv7-delete-ThisFriend-icon"></span>-->
+                    </div>
+                </div>
+            </div>
+            <span class="page1-Maindiv7-content-title" style="margin-top: 20px">标签
+            <span class="page1-div3-content-title-edit-tag3" data=0 ng-click="addTagIsshow1(1)">自定义</span>
+            <span class="page1-div3-content-title-edit-tag1" data=0 ng-click="addTagIsshow1(2)">选择</span>
+            </span>
+            <!-------------标签部分------------>
+            <div class="page1-div3-content-tags">
+                <div class="add_tag_input1">
+                    <input type="text" class="add_tag_input_add1" placeholder="自定义多个标签以，分隔">
+                </div>
+                <!--------动态添加标签-------->
+                <div class="side-by-side clearfix" style="margin-top: 20px;display: none">
+                    <div>
+
+                        <select data-placeholder="点击选择想要添加的标签" style="width:300px;"
+                                class="chosen-select" multiple tabindex="6">
+                            <optgroup ng-repeat="e in Taglibrary track by $index" label="{{e.tagName}}">
+
+                                <option ng-repeat="i in e.tags track by $index">{{i.tagName}}
+                                </option>
+
+                            </optgroup>
+                        </select>
+
+                    </div>
+
+                </div>
+                <!------已有标签展示------>
+                <div class="tags-box">
+                    <span ng-repeat="e in impPhotags1 track by $index" ng-click="delOneTag1(e)" class="tags-box-initTag"
+                          ng-class="ChangeColor($index+1,impPhotags1,e)" data="{{e}}">{{e}}<span
+                            style="font-size: 15px;cursor: pointer;padding: 0px 2px;position: relative;top: -2px">x</span></span>
+                </div>
+            </div>
+            <!-------------好友归属------------>
+            <div class="forPhone page1-Maindiv7-forPhone">
+                <span class="page1-div3-content-title">好友归属</span>
+                <div class="forPhone-content">
+                    <span class="forPhone-content-logo"></span>&#12288;微信：<span class="blue klk klk1"></span>
+                </div>
+            </div>
+            <!-------------好友描述------------>
+            <div class="whiteMe page1-Maindiv7-whiteMe">
+                <span class="page1-div3-content-title">描述</span>
+                <div class="whiteMeAll ">
+                    <textarea class="page1-Maindiv7-whiteMeContent" tabindex="0">
+
+                    </textarea>
+                    <span class="whiteMeContentEdit page1-Maindiv7-whiteMeContentEdit" ng-click="editWhitMe1()"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------------------------设置部分-------------------------->
+    <div class="sure-del">
+        <div class="sure-del-body">
+                  <span class="sure-del-icon">
+
+        </span>
+            <span class="sure-del-text">  &nbsp;确定删除本条回复吗？</span>
+
+        </div>
+        <div class="sure-del-btn">
+            <button class="sure-del-btn-close" ng-click="closesuredel()">取消</button>
+            <button class="sure-del-btn-sure" ng-click="suredelThisdata()">确定</button>
+        </div>
+    </div>
+    <div class="sure-del-1">
+        <div class="sure-del-1-body">
+                  <span class="sure-del-icon">
+
+        </span>
+            <span class="sure-del-text">  &nbsp;确定删除本条回复吗？</span>
+
+        </div>
+        <div class="sure-del-btn">
+            <button class="sure-del-btn-close" ng-click="closePage3suredel()">取消</button>
+            <button class="sure-del-btn-sure" ng-click="surePage3delThisdata()">确定</button>
+        </div>
+    </div>
+    <div class="writeNewTag">
+        <div class="writeNewTag-con">
+            <div class="writeNewTag-title">
+                请输入新标签：
+            </div>
+            <input class="writeNewTag-title-write" type="text">
+        </div>
+        <div class="writeNewTag-title-write-error">
+            标签已存在！
+        </div>
+        <div class="writeNewTag-btn">
+            <button class="writeNewTag-btn-close" ng-click="closewriteNewTag()">取消</button>
+            <button class="writeNewTag-btn-sure" ng-click="sureNewTag()">确定</button>
+        </div>
+    </div>
+    <div class="writeNewTag1">
+        <div class="writeNewTag1-con">
+            <div class="writeNewTag1-title">
+                请输入新标签组：
+            </div>
+            <input class="writeNewTag1-title-write" type="text" maxlength="8">
+        </div>
+        <div class="writeNewTag-title-write-error1">
+            标签组已存在！
+        </div>
+        <div class="writeNewTag1-btn">
+            <button class="writeNewTag1-btn-close" ng-click="closewriteNewTagGroup()">取消</button>
+            <button class="writeNewTag1-btn-sure" ng-click="surewriteNewTagGroup()">确定</button>
+        </div>
+    </div>
+    <div class="writeNewTag2">
+        <div class="writeNewTag2-con">
+            <div class="writeNewTag2-title">
+                请输入新分组：
+            </div>
+            <input class="writeNewTag2-title-write" type="text" maxlength="8">
+        </div>
+        <div class="writeNewTag2-title-write-error1">
+            新分组已存在！
+        </div>
+        <div class="writeNewTag2-btn">
+            <button class="writeNewTag2-btn-close" ng-click="closewriteNewAddGroup()">取消</button>
+            <button class="writeNewTag2-btn-sure" ng-click="surewriteNewAddGroup()">确定</button>
+        </div>
+    </div>
+    <div class="writeNewTag3">
+        <div class="writeNewTag3-con">
+            <div class="writeNewTag3-title">
+                请输入新短语：
+            </div>
+            <input class="writeNewTag3-title-write" type="text">
+        </div>
+        <div class="writeNewTag3-title-write-error1">
+            新短语已存在！
+        </div>
+        <div class="writeNewTag3-btn">
+            <button class="writeNewTag3-btn-close" ng-click="closewriteNewAddGroup1()">取消</button>
+            <button class="writeNewTag3-btn-sure" ng-click="surewriteNewAddGroup1()">确定</button>
+        </div>
+    </div>
+    <div class="writeNewTag4">
+        <div class="writeNewTag4-con">
+            <div class="writeNewTag4-title">
+                请输入新短语分组：
+            </div>
+            <input class="writeNewTag4-title-write" type="text">
+        </div>
+        <div class="writeNewTag4-title-write-error1">
+            新分组已存在！
+        </div>
+        <div class="writeNewTag4-btn">
+            <button class="writeNewTag4-btn-close" ng-click="closewriteNewAddGroup2()">取消</button>
+            <button class="writeNewTag4-btn-sure" ng-click="surewriteNewAddGroup2()">确定</button>
+        </div>
+    </div>
+    <div class="SettingInterface">
+        <div class="SettingInterface-header">
+            设置
+            <div class="close-SettingInterface" ng-click="closeSettingInterface()">
+                x
+            </div>
+        </div>
+        <div class="SettingInterface-body">
+            <p class="SettingInterface-body-header">
+                设置
+            </p>
+            <div class="SettingInterface-body-swith">
+                <ul>
+                    <li ng-click="ettingInterfaceswith(1)"><span class="SettingInterface-body-swith-img-1"></span>&nbsp;自动回复
+                    </li>
+                    <li ng-click="ettingInterfaceswith(2)"><span class="SettingInterface-body-swith-img-2"></span>&nbsp;标签设置
+                    </li>
+                    <li ng-click="ettingInterfaceswith(3)"><span class="SettingInterface-body-swith-img-3"></span>&nbsp;分组设置
+                    </li>
+                    <li ng-click="ettingInterfaceswith(4)"><span class="SettingInterface-body-swith-img-4"></span>&nbsp;快捷短语设置
+                    </li>
+                    <li ng-click="ettingInterfaceswith(5)"><span class="SettingInterface-body-swith-img-5"></span>&nbsp;群消息设置
+                    </li>
+                </ul>
+
+            </div>
+            <!--------自动回复部分------->
+            <div class="SettingInterface-body-first-table">
+                <div class="SettingInterface-body-first-table-a">
+                    自动回复
+                    <span class="SettingInterface-body-first-off" ng-click="AutomaticSwich($event)" data="1">
+
+                    </span>
+                    <button class="SettingInterface-body-first-table-a-button" ng-click="AddmodifiedkeywordsShow()">
+                        添加关键词
+                    </button>
+                </div>
+                <div class="SettingInterface-body-first-table-Explain">
+                    当您不方便聊天时，开启自动回复可以帮助您自动回复好友的消息
+                </div>
+                <div class="SettingInterface-body-first-table-table">
+                    <table class="layui-hide" id="test">
+                    </table>
+                    <div id="test1"></div>
+                </div>
+                <div class="Addmodifiedkeywords">
+                    <div class="Addmodifiedkeywords-title">
+                        添加/编辑关键词回复
+                    </div>
+                    <div class="Addmodifiedkeywords-body">
+                        <ul>
+                            <li class="Addmodifiedkeywords-body-first">&#12288;关键词： <input maxlength="30"
+                                                                                           class="Addmodifiedkeywords-body-first-inpuit-imporant"
+                                                                                           type="text">
+                                <div class="Addmodifiedkeywords-body-first-say">
+                                    关键词不能为空且最多30字
+                                </div>
+                            </li>
+                            <li class="Addmodifiedkeywords-body-second">匹配类型：
+                                <div class="Addmodifiedkeywords-body-second-radio">
+                                    <input type="radio" class="wanquan" checked name="isY" value=0>&nbsp;完全匹配
+                                    <span>&nbsp;好友输入内容和此关键词一样才会触发 </span><br><br>
+                                    <input type="radio" class="mohu" name="isY" value=1>&nbsp;模糊匹配
+                                    <span>&nbsp;好友输入内容包含此关键词才会触发  </span>
+                                </div>
+                            </li>
+                            <li class="Addmodifiedkeywords-body-three">回复内容：
+                                <textarea placeholder="请输入回复文字内容
+" rows="4" class="Addmodifiedkeywords-body-three-text">
+
+                                </textarea>
+                                <div class="Addmodifiedkeywords-body-three-upImg">
+                                    <div class="Addmodifiedkeywords-body-three-upImg-add">
+                                        +
+                                    </div>
+                                    <div class="Addmodifiedkeywords-body-three-upImg-text">上传照片</div>
+                                </div>
+                                <div class="Addmodifiedkeywords-body-three-upImg-input-part">
+
+
+                                    <input class="Addmodifiedkeywords-body-three-upImg-input" type="file"
+                                           accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" upload-image3>
+                                </div>
+                                <img class="last-Img" src="" alt="">
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="Addmodifiedkeywords-off-open">
+                        <div class="Addmodifiedkeywords-off-open-group">
+                            <button ng-click="closeAddmodifiedkeywords()">取消</button>
+                            <button ng-click="SureAddmodifiedkeywords()">确定</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--------标签设置部分------->
+            <div class="SettingInterface-body-second-table">
+                <div class="SettingInterface-body-first-table-a">
+                    标签设置
+                    <span class="SettingInterface-body-second-table-say">
+                        分组名字最多8个字
+                    </span>
+                    <button class="SettingInterface-body-first-table-a-button" ng-click="openAddGroup()">
+                        添加标签组
+                    </button>
+                </div>
+
+                <div class="SettingInterface-body-second-body">
+                    <!-----------标签表格tirle---------->
+                    <div class="SettingInterface-body-second-body-title">
+                        <ul>
+                            <li>序号</li>
+                            <li>标签组名称</li>
+                            <li>创建时间</li>
+                            <li>操作</li>
+                        </ul>
+                    </div>
+                    <!-----------标签表格内容---------->
+                    <div ng-repeat=" g in SetUpTagGroup track by $index" class="SettingInterface-body-second-body-con">
+                        <!-----------标签组------------>
+                        <div
+                                class="SettingInterface-body-second-body-con-header">
+                            <ul>
+                                <li>{{$index+1}}</li>
+                                <li><input class="readonly-input" type="text" value="{{g.tagName.tagName}}"
+                                           readonly="readonly"></li>
+                                <li>{{g.tagName.createTime}}</li>
+                                <li>
+                                    <button data="0" class="SettingInterface-body-second-body-edit"
+                                            ng-click="editSetUpTags(g.tagName.id,$event)">
+                                        编辑
+                                    </button>
+                                    <button class="SettingInterface-body-second-body-del"
+                                            ng-click="deltSetUpTags(g.tagName.id)">删除
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-----------标签租单个标签------------>
+                        <div ng-repeat="h in g.tags"
+                             class="SettingInterface-body-second-body-con-header SettingInterface-body-second-body-con-header-child">
+                            <ul>
+                                <li></li>
+                                <li class="bot-co">
+                                    <input class="readonly-input" type="text" value="{{h.tagName}}"
+                                           readonly="readonly">
+                                </li>
+                                <li class="bot-co">{{h.createTime}}</li>
+                                <li class="bot-co">
+                                    <button data="0" class="SettingInterface-body-second-body-edit-child"
+                                            ng-click="editSetUpTagsChild(h.id,$event)">编辑
+                                    </button>
+                                    <button class="SettingInterface-body-second-body-del-child"
+                                            ng-click="deltSetUpTags(h.id)">删除
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--------------添加标签---------------->
+                        <div class="SettingInterface-body-second-addtag-group">
+                            <ul>
+                                <li></li>
+                                <li>
+                                    <button class="second-addtag-group" ng-click="editSetUpAddTags(g.tagName.id)">添加标签
+                                    </button>
+                                </li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+            <!--------分组设置部分------->
+            <div class="SettingInterface-body-three-table">
+                <div class="SettingInterface-body-first-table-a">
+                    分组设置
+                    <span class="SettingInterface-body-second-table-say">
+                        分组名字最多8个字
+                    </span>
+                    <button class="SettingInterface-body-first-table-a-button" ng-click="openAddGroup1()">
+                        添加分组
+                    </button>
+                </div>
+                <div class="SettingInterface-body-second-body">
+                    <div class="SettingInterface-body-three-body-title">
+                        <ul>
+                            <li>序号</li>
+                            <li>分组名称</li>
+                            <li>创建时间</li>
+                            <li>操作</li>
+                        </ul>
+                    </div>
+                    <div class="SettingInterface-body-three-body-con">
+                        <ul ng-repeat="y in SetUpallthegroups track by $index">
+                            <li><span class="three-body-index">{{$index+1}}</span> <span
+                                    class="three-body-tishi">已存在！</span></li>
+                            <li><input readonly="readonly" class="SettingInterface-body-three-body-con-input-edit"
+                                       type="text" name="" id=""
+                                       value="{{y.name}}"></li>
+                            <li>{{y.createTime}}</li>
+                            <li class="">
+                                <button class="SettingInterface-body-three-body-con-btn-edit" data="0"
+                                        ng-click="editAllGroupName(y.id,$event)">编辑
+                                </button>
+                                <button class="SettingInterface-body-three-body-con-btn-del"
+                                        ng-click="DelAllGroupName(y.id,$event)">删除
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <!--------快捷短语设置部分------->
+            <div class="SettingInterface-body-Four-table">
+                <div class="SettingInterface-body-first-table-a">
+                    快捷短语设置
+
+                    <button class="SettingInterface-body-first-table-a-button" ng-click="openAddGroup2()">
+                        添加短语
+                    </button>
+                    <a target="_blank" href="{{DownFileOut}}"
+                       class="SettingInterface-body-first-table-a-button SettingInterface-body-first-table-a-button-1">
+                        导出
+                    </a>
+                    <button class="SettingInterface-body-first-table-a-button SettingInterface-body-first-table-a-button-1"
+                            ng-click="openAddGroup4()">
+                        导入
+                    </button>
+
+                </div>
+                <div class="Importphrase">
+                    <div class="Importphrase-header">
+                        导入快捷短语
+                    </div>
+                    <div class="Importphrase-title">
+                        <span class="Importphrase-title-number">1</span>
+                        <span class="Importphrase-title-text"> 上传文件</span>
+                        <span class="Importphrase-title-line"></span>
+                        <span class="Importphrase-title-number">2</span>
+                        <span class="Importphrase-title-text"> 导入数据</span>
+                        <span class="Importphrase-title-line"></span>
+                        <span class="Importphrase-title-number">3</span>
+                        <span class="Importphrase-title-text">完成</span>
+                        <div class="Importphrase-con">
+                            <div class="Importphrase-con-first">
+                                <p>1.请按照模板格式准备需要导入的数据</p>
+                                <div class="Importphrase-con-donwload">
+                                    <span class="load-1"></span>
+                                    <a target="_blank" href="./快捷回复模板.xls" class="load-1-path"
+                                       ng-click="Downloadtemplate()">下载快捷短语模板</a>
+                                </div>
+                            </div>
+                            <div class="Importphrase-con-second">
+                                <p>2.请选择需要导入的文件</p>
+                                <div class="Importphrase-con-second-donwload">
+                                    <input class="Importphrase-con-second-donwload-input" type="file"
+                                           accept=".XLS,.xlsx" upload-file4>
+                                    <button class="Importphrase-con-second-donwload-input-button">上传附件</button>
+                                    <span class="Importphrase-con-second-donwload-say">支持xls,xlsx文件，单个不得超过5M</span>
+                                    <div class="upText1">
+                                        <dl>
+                                            <dt>
+                                                <div class="exselImg1">
+
+                                                </div>
+                                            </dt>
+                                            <dd>
+                                                <ul>
+                                                    <li class="exselTextGra1">文件名</li>
+                                                    <li class="exselTextGray1">0kb</li>
+                                                </ul>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="Importphrase-con-second-donwload-null">
+                                        请上传文件！
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Importphrase-header-bottom">
+                        <div class="Importphrase-header-bottom-btn">
+                            <button class="Importphrase-header-bottom-btn-close" ng-click="closeAddGroup4()">
+                                取消
+                            </button>
+                            <button class="Importphrase-header-bottom-btn-sure" ng-click="Startimporting()">
+                                开始导入
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="SettingInterface-body-second-body">
+                    <div class="SettingInterface-body-Four-table-title">
+                        <ul>
+                            <li>短语分组
+                                <button class="SettingInterface-body-Four-table-title-Add" ng-click="openAddGroup3()">
+                                    <span>+</span>
+                                </button>
+                            </li>
+                            <li>&nbsp;&nbsp;序号</li>
+                            <li>短语</li>
+                            <li>创建时间</li>
+                            <li>操作</li>
+                        </ul>
+                    </div>
+
+                    <div class="SettingInterface-body-Four-table-con">
+                        <div class="SettingInterface-body-Four-title">
+                            <ul ng-repeat=" m in AllShortcutphrasegroups track by $index">
+                                <li>
+                                    <input type="text" value="{{splitSayName(m.title.title)}}" readonly="readonly"
+                                           ng-click="SwitchingShortcutphrase(m.title.id,$event)">
+                                    <button class="edit-body-Four-Title" ng-click="editbodyFourTitle(m.title.id,$event)"
+                                            data='0'>编辑
+                                    </button>
+                                    <button class="del-tbody-Four-Title"
+                                            ng-click="deltbodyFourTitle(m.title.id,m.title.title)">删除
+                                    </button>
+                                    <div class="SettingInterface-body-Four-title-tishi">分组已存在！</div>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="SettingInterface-body-Four-table-body">
+                            <ul ng-repeat="n in oneShortcutphrasegroups track by $index">
+                                <!--<li><input type="text" class="SettingInterface-body-Four-input" readonly="readonly" value="{{m.title}}"></li>-->
+                                <li>{{$index+1}} <span class="SettingInterface-body-Four-table-body-error">已存在！</span>
+                                </li>
+                                <li><input type="text" class="SettingInterface-body-input" readonly="readonly"
+                                           value="{{splitSayName1(n.content)}}"></li>
+                                <li>{{n.createTime}}</li>
+                                <li class="SettingInterface-body-Four-table-btn">
+                                    <button class="editAllGroupName1-1" data="0"
+                                            ng-click="editAllGroupName1(n.id,n.parentId,m.title.id,$event)">编辑
+                                    </button>
+                                    <button class="SettingInterface-body-three-body-con-btn-del"
+                                            ng-click="DelAllGroupName1(n.id)">删除
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!--------群消息设置部分------->
+            <div class="SettingInterface-body-Five-table">
+                <div class="SettingInterface-body-first-table-a">
+                    是否接收群聊消息
+                    <span class="SettingInterface-body-first-open-GroupMsg" ng-click="AutomaticSwich_GroupMsg($event)"
+                          data="1">
+
+                    </span>
+                </div>
+                <div class="SettingInterface-body-first-table-Explain1">
+                    操纵开关控制是否接收群消息，默认开启状态接收群消息
+                </div>
+                <div class="SettingInterface-body-first-table-Explain1_tishi">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="Picture-preview">
+
+</div>
+<div class="J_Preview">
+    <div class="mask preview_mask"></div>
+    <div class="img_preview_container" id="preview_container">
+        <div class="img_container" id="img_container">
+            <div class="img_wrp" id="img_dom">
+                <img class="rotate0" id="img_preview" src="">
+                <div class="load-waite-img-big">
+
+                </div>
+            </div>
+            <div class="close-img_wrp" ng-click="close_img_wrp()">
+                X
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="barDemo">
+    <button class="layui-btn layui-btn-xs">编辑</button>
+    <button class="layui-btn layui-btn-danger layui-btn-xs">删除</button>
+</script>
